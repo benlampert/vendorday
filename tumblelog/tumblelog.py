@@ -2,6 +2,7 @@ from flask import Flask
 from flaskext.mongoengine import MongoEngine
 from mongoengine import connect
 
+#enter mongolab credentials here
 un = ''
 pw = ''
 
