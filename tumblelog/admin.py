@@ -1,21 +1,21 @@
 from flask import Blueprint, request, redirect, render_template, url_for
-from views import MethodView
+from flask.views import MethodView
 
 from flaskext.mongoengine.wtf import model_form
 
 from auth import requires_auth
-from models import Post, Comment
+from models import *
 
 admin = Blueprint('admin', __name__, template_folder='templates')
 
 
 class List(MethodView):
     decorators = [requires_auth]
-    cls = Post
+    cls = Vendor
 
     def get(self):
-        posts = self.cls.objects.all()
-        return render_template('admin/list.html', posts=posts)
+        vendors = self.cls.objects.all()
+        return render_template('admin/list.html', vendors=vendors)
 
 
 class Detail(MethodView):
@@ -23,16 +23,16 @@ class Detail(MethodView):
     decorators = [requires_auth]
 
     def get_context(self, slug=None):
-        form_cls = model_form(Post, exclude=('created_at', 'comments'))
+        form_cls = model_form(Vendor, exclude=('created_at', 'comments'))
 
         if slug:
-            post = Post.objects.get_or_404(slug=slug)
+            post = Vendor.objects.get_or_404(slug=slug)
             if request.method == 'POST':
                 form = form_cls(request.form, inital=post._data)
             else:
                 form = form_cls(obj=post)
         else:
-            post = Post()
+            post = Vendor()
             form = form_cls(request.form)
 
         context = {
