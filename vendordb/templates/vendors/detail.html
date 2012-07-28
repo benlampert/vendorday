@@ -1,0 +1,45 @@
+{% import "__forms.html" as forms %}
+{% extends "base.html" %}
+
+{% block page_header %}
+<ul class="breadcrumb">
+  <li>
+    <a href="/browse">Browse</a> <span class="divider">/</span>
+  </li>
+  <li class="active">{{ vendor.vendorName }}</li>
+</ul>
+  <div class="page-header">
+    <h1>{{ vendor.vendorName }}</h1>
+  </div>
+{% endblock %}
+
+{% block content %}
+  <p>Main Offerings: {{ vendor.vendorOfferings }}<p>
+  <!--<p>Vendor created on: {{ vendor.created_at.strftime('%H:%M %Y-%m-%d') }}</p>-->
+  <p>Facts: {{ vendor.vendorFacts }}</p>
+  <p>Keywords: {{ vendor.vendorKeywords }}</p>
+
+  <hr>
+  <h2>Comments</h2>
+  {% if vendor.comments %}
+    {% for comment in vendor.comments %}
+       <p>{{ comment.body }}</p>
+       <p><strong>{{ comment.author }}</strong> <small>on {{ comment.created_at.strftime('%H:%M %Y-%m-%d') }}</small></p>
+      {{ comment.text }}
+
+    {% endfor %}
+
+  {% endif %}
+      <hr>
+	<h2>Add a comment</h2>
+	<div class="row">
+	<div class="span8">
+	<form action="." method="post">
+	  {{ forms.render(form) }}
+	  <div class="actions">
+		<input type="submit" class="btn success" value="Add Comment">
+	  </div>
+	</form>
+	</div>
+	</div>
+{% endblock %}

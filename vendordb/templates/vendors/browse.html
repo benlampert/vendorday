@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<ul class="breadcrumb">
+  <li>
+    <a href="/">Home</a> <span class="divider">/</span>
+  </li>
+  <li class="active">Browse</li>
+</ul>
+<h2>Browse all Vendors</h2>
+    <table class="table condensed-table">
+
+        <thead>
+        <th>Vendor Name</th>
+        <th>Vendor Keywords</th>
+        <th>Date Created</th>
+        </thead>
+        
+        <tbody>
+        	{% for vendor in vendors['allSorted'] %}
+        <tr>
+        <td>
+      <strong><a href="{{ url_for('vendors.detail', slug=vendor.slug) }}">{{ vendor.vendorName }}</a></strong>
+      </td>
+      <td><p>{{ vendor.vendorKeywords|truncate(50) }}</p></td>
+
+      <td>
+      <p>
+      {{ vendor.created_at.strftime('%m-%d-%Y')  }}
+      </p>
+      </td>
+      </tr>
+      </tbody>
+  
+      
+    {% endfor %}
+        </table>
+        
+    
+{% endblock %}
