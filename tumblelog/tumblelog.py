@@ -3,8 +3,6 @@ from flaskext.mongoengine import MongoEngine
 #from mongoengine import connect
 
 #enter mongolab credentials here
-#un = 'benlampert'
-#pw = 'hannah'
 
 #connect('flasktest', host='mongodb://'+un+':'+pw+'@ds033877.mongolab.com:33877/flasktest')
 
