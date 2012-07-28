@@ -1,5 +1,3 @@
-This is the readme file, how exciting
-
 #bugs
 DONE - when add comments go to: POST method not allowed error
 DONE - no list of vendors on /admin page
